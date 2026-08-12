@@ -1,0 +1,28 @@
+# Files excluded from the Vercel upload bundle. Vercel already ignores most
+# of these by default; the entries below are the ones that bit us during
+# deployment testing.
+.env
+.env.*
+!.env.example
+
+# Local tooling — never ship.
+.git
+.github
+.vscode
+.idea
+.DS_Store
+
+# Logs / cache / build artifacts.
+*.log
+.cache
+.turbo
+.vinxi
+.tanstack
+.nitro
+.output
+
+# Test fixtures.
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx

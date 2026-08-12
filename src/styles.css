@@ -1,0 +1,394 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Telux design system — "on-device vault"
+ * Deep graphite canvas, electric lime signal, warm sand secondary.
+ * All colors in oklch. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-signal: var(--signal);
+  --color-signal-foreground: var(--signal-foreground);
+  --color-sand: var(--sand);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --background: oklch(0.17 0.012 145);
+  --foreground: oklch(0.96 0.008 120);
+  --surface: oklch(0.213 0.014 148);
+  --surface-2: oklch(0.256 0.016 150);
+  --card: oklch(0.213 0.014 148);
+  --card-foreground: oklch(0.96 0.008 120);
+  --popover: oklch(0.213 0.014 148);
+  --popover-foreground: oklch(0.96 0.008 120);
+
+  --primary: oklch(0.88 0.19 124);
+  --primary-foreground: oklch(0.19 0.03 140);
+  --signal: oklch(0.88 0.19 124);
+  --signal-foreground: oklch(0.19 0.03 140);
+
+  --secondary: oklch(0.256 0.016 150);
+  --secondary-foreground: oklch(0.96 0.008 120);
+  --sand: oklch(0.86 0.07 82);
+
+  --muted: oklch(0.256 0.016 150);
+  --muted-foreground: oklch(0.72 0.018 140);
+  --accent: oklch(0.3 0.03 150);
+  --accent-foreground: oklch(0.96 0.008 120);
+  --destructive: oklch(0.63 0.2 24);
+  --destructive-foreground: oklch(0.98 0.005 120);
+
+  --border: oklch(0.33 0.018 150);
+  --input: oklch(0.33 0.018 150);
+  --ring: oklch(0.88 0.19 124);
+
+  --chart-1: oklch(0.88 0.19 124);
+  --chart-2: oklch(0.86 0.07 82);
+  --chart-3: oklch(0.7 0.1 190);
+  --chart-4: oklch(0.6 0.12 300);
+  --chart-5: oklch(0.75 0.15 60);
+
+  --sidebar: oklch(0.19 0.013 148);
+  --sidebar-foreground: oklch(0.96 0.008 120);
+  --sidebar-primary: oklch(0.88 0.19 124);
+  --sidebar-primary-foreground: oklch(0.19 0.03 140);
+  --sidebar-accent: oklch(0.256 0.016 150);
+  --sidebar-accent-foreground: oklch(0.96 0.008 120);
+  --sidebar-border: oklch(0.33 0.018 150);
+  --sidebar-ring: oklch(0.88 0.19 124);
+
+  --gradient-signal: linear-gradient(
+    135deg,
+    oklch(0.88 0.19 124) 0%,
+    oklch(0.9 0.13 150) 55%,
+    oklch(0.86 0.07 82) 100%
+  );
+  --gradient-veil: radial-gradient(
+    120% 90% at 50% -10%,
+    color-mix(in oklab, var(--signal) 22%, transparent) 0%,
+    transparent 62%
+  );
+  --shadow-lift: 0 24px 60px -28px oklch(0 0 0 / 0.75);
+  --shadow-signal:
+    0 0 0 1px color-mix(in oklab, var(--signal) 30%, transparent),
+    0 20px 60px -24px color-mix(in oklab, var(--signal) 45%, transparent);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+  }
+
+  ::selection {
+    background: var(--signal);
+    color: var(--signal-foreground);
+  }
+}
+
+@utility text-signal-gradient {
+  background-image: var(--gradient-signal);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility surface-card {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface-2) 80%, transparent),
+    color-mix(in oklab, var(--surface) 92%, transparent)
+  );
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lift);
+}
+
+@utility grid-veil {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in oklab, var(--border) 60%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--border) 60%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 72px 72px;
+  mask-image: radial-gradient(80% 60% at 50% 20%, black, transparent 85%);
+}
+
+@utility veil-glow {
+  background-image: var(--gradient-veil);
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s var(--ease-out-soft),
+    transform 0.7s var(--ease-out-soft);
+
+  &[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility marquee-track {
+  animation: telux-marquee 32s linear infinite;
+}
+
+@keyframes telux-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes telux-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@utility float-slow {
+  animation: telux-float 7s ease-in-out infinite;
+}
+
+@keyframes telux-pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--signal) 45%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 18px transparent;
+  }
+}
+
+@utility pulse-ring {
+  animation: telux-pulse-ring 2.4s ease-out infinite;
+}
+
+@keyframes telux-scan {
+  0% {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(420%);
+    opacity: 0;
+  }
+}
+
+@utility scan-line {
+  animation: telux-scan 3.6s var(--ease-out-soft) infinite;
+}
+
+/*
+ * Talk-with-Document orb — animated visual.
+ * Prefix everything with `maara-` for historical stability (renaming would
+ * invalidate cached CSS without UX gain since the visual is unchanged).
+ */
+
+@keyframes maara-spin-cw {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes maara-spin-ccw {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes maara-pulse-core {
+  0%,
+  100% {
+    transform: scale(0.96);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes maara-pulse-core-fast {
+  0%,
+  100% {
+    transform: scale(0.94);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes maara-eq-bar {
+  0% {
+    transform: scaleY(0.3);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@utility maara-orb-ring-cw {
+  animation: maara-spin-cw 24s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+@utility maara-orb-ring-ccw {
+  animation: maara-spin-ccw 18s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+@utility maara-orb-core-idle {
+  animation: maara-pulse-core 1.6s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+
+@utility maara-orb-core-active {
+  animation: maara-pulse-core-fast 1s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+
+@utility maara-orb-eq {
+  animation: maara-eq-bar 600ms ease-in-out infinite alternate;
+  transform-origin: 50% 100%;
+}
+
+/* When the parent orb is in idle/thinking/error state, freeze the equalizer
+   bars so they don't keep moving in the background. Active states toggle
+   this back on via a `[data-eq="on"]` attribute on the parent. */
+[data-eq="off"] .maara-orb-eq {
+  animation: none;
+  transform: scaleY(0.25);
+}
+
+/* Ambient particles around the Talk-with-Document orb. Each particle is
+   positioned with inline left/top (in the JSX) and these keyframes gently
+   drift it around that anchor so the cloud "breathes" without ever leaving
+   the orb's neighborhood. */
+@keyframes maara-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(var(--drift, 6px), calc(var(--drift, 6px) * -0.5)) scale(1.4);
+    opacity: 0.7;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0;
+  }
+}
+
+.maara-particle {
+  animation: maara-drift linear infinite;
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  .maara-particle {
+    animation: none;
+    opacity: 0.4;
+  }
+}

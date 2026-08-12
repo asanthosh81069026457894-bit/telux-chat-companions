@@ -1,0 +1,13 @@
+-- ============================================================================
+-- Telux — Auth + RLS bootstrap
+-- Run this once in: Supabase Dashboard → SQL Editor → New query
+--
+-- Goal: store NOTHING except authentication. Users' documents stay in their
+-- own browser storage. The only DB row we maintain per user is a tiny
+-- `profiles` record (email + display name) so we can show their account
+-- in the UI.
+-- ============================================================================
+
+-- 1) Block any future use of Supabase Storage from the client.
+--    Telux never uploads documents to Supabase. Defense in depth: even if
+--    some future code accidentally calls storage, the anon key is denied.
