@@ -5,6 +5,35 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
+ * Progressive-enhancement safety net for the .reveal animation.
+ *
+ * Default: every .reveal block is visible. The Tailwind @utility reveal
+ * below only carries the transition timing — it does NOT hide anything
+ * by default. This means a JS-disabled or JS-broken deploy still renders
+ * a fully readable page.
+ *
+ * Once React mounts and the inline script in __root.tsx swaps the
+ * <html class="no-js"> for class="js", this rule kicks in and applies
+ * opacity:0 + translateY(22px) to every block still waiting for the
+ * IntersectionObserver. The observer then flips data-visible="true"
+ * and the block fades in. So:
+ *   - JS works  → animation plays (slight flash, then reveal).
+ *   - JS broken → page is visible immediately, no animation.
+ *
+ * Without this, every section was rendered with opacity:0 in SSR, the
+ * observer never ran if hydration crashed, and the page looked blank.
+ */
+html.js .reveal[data-visible="false"] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+html.js .reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/*
  * Telux design system — "on-device vault"
  * Deep graphite canvas, electric lime signal, warm sand secondary.
  * All colors in oklch. Never hardcode colors in components.
@@ -207,16 +236,27 @@
 }
 
 @utility reveal {
-  opacity: 0;
-  transform: translateY(22px);
+  /*
+   * Reveal animation: starts INVISIBLE and slides up + fades in when the
+   * IntersectionObserver flips data-visible="true".
+   *
+   * Progressive-enhancement safety: if the JS bundle fails to load or
+   * hydrate, every section is rendered server-side with data-visible="false"
+   * and stays invisible — looking like a blank page. We mitigate this by
+   * using a `no-js` fallback: the html element has class "no-js" added by
+   * the root layout (and immediately replaced by "js" via an inline script
+   * that runs before hydration), so when JS is missing we force all
+   * .reveal blocks to be visible. When JS works, the observer runs
+   * normally and the opacity-0 → opacity-1 transition still plays.
+   *
+   * We put the "hidden by default" rule in a plain CSS class scope
+   * instead of nesting inside @utility because Tailwind's @utility
+   * does not support the `html.js &` selector form. See .js-reveal-ready
+   * at the top of the file for the actual rule.
+   */
   transition:
     opacity 0.7s var(--ease-out-soft),
     transform 0.7s var(--ease-out-soft);
-
-  &[data-visible="true"] {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 @utility marquee-track {

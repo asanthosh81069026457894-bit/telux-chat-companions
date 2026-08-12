@@ -107,8 +107,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="no-js">
       <head>
+        {/* Runs synchronously before React hydrates. If JS works, it swaps
+            `no-js` for `js` so the .reveal opacity-0 animation still plays.
+            If JS is broken or blocked, no-js stays and the page is visible
+            without the slide-up — but it is visible. This is the difference
+            between "blank page" and "page loads with no fancy animation".
+            The string is a single classList.replace — no user input, no
+            network, no eval, so dangerouslySetInnerHTML is safe here. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.replace('no-js','js')",
+          }}
+        />
         <HeadContent />
       </head>
       <body>

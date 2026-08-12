@@ -18,6 +18,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TalkRouteImport } from './routes/talk'
+import { Route as ApiHealthzRouteImport } from './routes/api.healthz'
 import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 import { Route as DashboardBillingRouteImport } from './routes/dashboard.billing'
 import { Route as DashboardDocumentsRouteImport } from './routes/dashboard.documents'
@@ -69,6 +70,11 @@ const TalkRoute = TalkRouteImport.update({
   path: '/talk',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiHealthzRoute = ApiHealthzRouteImport.update({
+  id: '/api/healthz',
+  path: '/api/healthz',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthCallbackRoute = AuthCallbackRouteImport.update({
   id: '/auth/callback',
   path: '/auth/callback',
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/talk': typeof TalkRoute
+  '/api/healthz': typeof ApiHealthzRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/dashboard/billing': typeof DashboardBillingRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/talk': typeof TalkRoute
+  '/api/healthz': typeof ApiHealthzRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/dashboard/billing': typeof DashboardBillingRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/talk': typeof TalkRoute
+  '/api/healthz': typeof ApiHealthzRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/dashboard/billing': typeof DashboardBillingRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
@@ -156,6 +165,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sitemap.xml'
     | '/talk'
+    | '/api/healthz'
     | '/auth/callback'
     | '/dashboard/billing'
     | '/dashboard/documents'
@@ -172,6 +182,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sitemap.xml'
     | '/talk'
+    | '/api/healthz'
     | '/auth/callback'
     | '/dashboard/billing'
     | '/dashboard/documents'
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sitemap.xml'
     | '/talk'
+    | '/api/healthz'
     | '/auth/callback'
     | '/dashboard/billing'
     | '/dashboard/documents'
@@ -205,6 +217,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TalkRoute: typeof TalkRoute
+  ApiHealthzRoute: typeof ApiHealthzRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
   ApiRazorpayWebhookRoute: typeof ApiRazorpayWebhookRoute
 }
@@ -274,6 +287,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TalkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/healthz': {
+      id: '/api/healthz'
+      path: '/api/healthz'
+      fullPath: '/api/healthz'
+      preLoaderRoute: typeof ApiHealthzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/callback': {
       id: '/auth/callback'
       path: '/auth/callback'
@@ -338,6 +358,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TalkRoute: TalkRoute,
+  ApiHealthzRoute: ApiHealthzRoute,
   AuthCallbackRoute: AuthCallbackRoute,
   ApiRazorpayWebhookRoute: ApiRazorpayWebhookRoute,
 }

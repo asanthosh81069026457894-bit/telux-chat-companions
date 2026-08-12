@@ -74,7 +74,11 @@
       "Bash(powershell -Command '$content = [System.IO.File]::ReadAllText\\(\"src/lib/supabaseServer.ts\"\\); $lines = $content -split \"`n\"; $lines[79] = \"  const cleaned = raw.replace\\(/^[\\\\\\\\s\\\\\\\\x00-\\\\\\\\x1F]+|[\\\\\\\\s\\\\\\\\x00-\\\\\\\\x1F]+\\\\$/g, \"\"\"\"\\); [System.IO.File]::WriteAllText\\(\"src/lib/supabaseServer.ts\", \\($lines -join \"`n\"\\)\\)')",
       "PowerShell(powershell -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\A Meghanadham\\\\AppData\\\\Local\\\\Temp\\\\fix-supabase.ps1\")",
       "Bash(powershell -Command '$content = [System.IO.File]::ReadAllText\\(\"src/lib/supabaseServer.ts\"\\); $lines = $content -split \"`n\"; for \\($i=78; $i -le 81; $i++\\) { $line = $lines[$i]; $hex = \"\"; for \\($j=0; $j -lt $line.Length; $j++\\) { $hex += \" {0:X2}\" -f [int][char]$line[$j] }; Write-Host \"$i : $hex\" }')",
-      "PowerShell(powershell -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\A Meghanadham\\\\AppData\\\\Local\\\\Temp\\\\fix-check-supabase.ps1\")"
+      "PowerShell(powershell -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\A Meghanadham\\\\AppData\\\\Local\\\\Temp\\\\fix-check-supabase.ps1\")",
+      "Bash(powershell -Command \"Get-Content 'C:\\\\Users\\\\A Meghanadham\\\\.claude\\\\projects\\\\C--Users-A-Meghanadham-OneDrive-Documents-telux-chat-companion-main\\\\21d017fc-f306-4b69-a746-a5196679b12b\\\\tool-results\\\\b09berbfb.txt' -Tail 3\")",
+      "Bash(git config *)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Fix blank page on deploy + add healthz *)"
     ]
   }
 }
